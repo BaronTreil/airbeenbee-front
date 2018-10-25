@@ -1,10 +1,10 @@
+import { AuthService } from "./../../services/auth.service";
 import { UserService } from "./../../services/user.service";
 import { Component, OnInit } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
   Validators,
-  FormArray,
   FormControl
 } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -17,9 +17,12 @@ import { Router } from "@angular/router";
 export class AuthenticationComponent implements OnInit {
   registerForm: FormGroup;
   loginForm: FormGroup;
+  registerErrorMsg: string;
+  loginErrorMsg: string;
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
@@ -53,6 +56,15 @@ export class AuthenticationComponent implements OnInit {
     if (this.registerForm.valid) {
       const email = this.registerForm.value["email"];
       const password = this.registerForm.value["password"];
+
+      this.authService.createNewUser(email, password).then(
+        () => {
+          this.router.navigate(["dashboard"]);
+        },
+        error => {
+          this.registerErrorMsg = error;
+        }
+      );
     }
   }
 
@@ -60,6 +72,16 @@ export class AuthenticationComponent implements OnInit {
     if (this.loginForm.valid) {
       const email = this.loginForm.value["email"];
       const password = this.loginForm.value["password"];
+
+      this.authService.signInUser(email, password).then(
+        () => {
+          this.router.navigate(['dashboard']);
+        },
+        (error) => {
+          this.loginErrorMsg = error;
+        }
+
+      );
     }
   }
 }

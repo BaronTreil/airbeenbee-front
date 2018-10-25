@@ -1,3 +1,6 @@
+import { UserService } from "./services/user.service";
+import { AuthService } from "./services/auth.service";
+import { AuthGuardService } from "./services/auth-guard.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -11,11 +14,12 @@ import { RouterModule, Routes } from "@angular/router";
 import { AuthenticationComponent } from "./auth/authentication/authentication.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const appRoutes: Routes = [
-  { path: "auth/signup", component: SignupComponent },
   { path: "", component: AuthenticationComponent },
-  { path: "auth/signin", component: SigninComponent }
+  { path: "dashboard", canActivate: [AuthGuardService], component: DashboardComponent},
+  { path: '**', redirectTo: 'AuthenticationComponent' }
 ];
 
 @NgModule({
@@ -24,7 +28,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     SigninComponent,
     SignupComponent,
-    AuthenticationComponent
+    AuthenticationComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthGuardService, AuthService, UserService],
   schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
