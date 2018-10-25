@@ -1,0 +1,54 @@
+<div class="row justify-content-center align-items-center h-100 w-100 authentication_bg">
+  <div class="col-sm-4 align-items-center">
+
+    <div class="card border-dark mx-auto" style="max-width: 18rem;">
+      <div class="blurBg"></div>
+      <div class="card-header">Login</div>
+      <div class="card-body text-dark">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="text" id="emailLogin" class="form-control" formControlName="email">
+          </div>
+          <div class="form-group">
+            <label for="email">Password *</label>
+            <input type="password" id="passwordLogin" class="form-control" formControlName="password">
+          </div>
+
+          <button type="submit" class="btn btn-primary float-right" [disabled]="loginForm.invalid">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4 align-items-center">
+    <div class="card border-dark mx-auto" style="max-width: 18rem;">
+      <div class="card-header">Register</div>
+      <div class="card-body text-dark">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmitRegister()">
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" class="form-control" formControlName="email">
+          </div>
+          <div class="form-group">
+            <label for="email">Password</label>
+            <input type="password" id="password" class="form-control" formControlName="password">
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="userType" formControlName="userType" value=1 checked>Beekeeper
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="userType" formControlName="userType" value=0>Landlord
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary float-right" [disabled]="registerForm.invalid">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

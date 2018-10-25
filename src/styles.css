@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+.authentication_bg {
+  background: #292929 url('./assets/images/airbeenbee_logo_caca.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
