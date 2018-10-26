@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"><img src="./assets/images/airbeenbee_logo_gold.png" with="40" height="40"></a>
+  <a class="navbar-brand" href="#"><img src="./assets/images/airbeenbee_logo_gold.png" with="50" height="50"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,18 +8,23 @@
   <div class="collapse navbar-collapse" id="navbarsExample04">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Overview</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Hive clusters</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+
 
     </ul>
     <div class="navbar-right">
-        <button class="btn btn-outline-warning" (click)="logout()">Disconnect</button>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard/profile">Profile</a>
+        </li>
+        <li>
+          <button class="btn btn-outline-warning" (click)="logout()">Disconnect</button>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

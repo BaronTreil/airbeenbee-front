@@ -64,4 +64,8 @@ export class AuthService {
         this.emitAuthStatus();
       });
   }
+
+  editUser(){
+    //TODO edit password
+  }
 }

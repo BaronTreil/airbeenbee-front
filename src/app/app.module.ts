@@ -15,10 +15,16 @@ import { AuthenticationComponent } from "./auth/authentication/authentication.co
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
 
 const appRoutes: Routes = [
   { path: "", component: AuthenticationComponent },
-  { path: "dashboard", canActivate: [AuthGuardService], component: DashboardComponent},
+  {
+    path: "dashboard",
+    //canActivate: [AuthGuardService],
+    component: DashboardComponent
+  },
+  { path: "dashboard/profile", component: ProfileComponent },
   { path: '**', redirectTo: 'AuthenticationComponent' }
 ];
 
@@ -29,7 +35,8 @@ const appRoutes: Routes = [
     SigninComponent,
     SignupComponent,
     AuthenticationComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -43,4 +50,4 @@ const appRoutes: Routes = [
   schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
