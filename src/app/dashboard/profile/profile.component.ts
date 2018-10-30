@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { auth } from 'firebase';
 
 @Component({
   selector: 'app-profile',
@@ -26,13 +27,16 @@ export class ProfileComponent implements OnInit {
         [Validators.required, Validators.pattern(/[0-9a-zA-Z]{2,}/)]
       ],
       passwordCheck: [
-        "",
-        [Validators.required, Validators.pattern(/[0-9a-zA-Z]{2,}/)]
+        ""
       ]
     }, {
         validator: this.matchPasswords
       }
     );
+  }
+
+  onSubmitEditProfile(){
+    console.log("submitting ...");
   }
 
   checkOnChange() {
@@ -43,17 +47,19 @@ export class ProfileComponent implements OnInit {
     (pVal == pcVal) ? "" : this.editProfileForm
 
   }
+  get f() {
+    
+    return this.editProfileForm.controls;
+  }
 
-  matchPasswords(ac: AbstractControl) {
-    let password = ac.value(['password']);
-    let confirmPassword = ac.value(['passwordCheck']);
-    if (password != confirmPassword) {
-      console.log('false');
-      ac.get('confirmPassword').setErrors({ MatchPassword: true })
-    } else {
-      console.log('true');
-      return null
-    }
+
+  matchPasswords(group: FormGroup) {
+    let pass = group.controls.password.value;
+    let confirmPass = group.controls.passwordCheck.value;
+
+    let resp = (pass === confirmPass ? null : { notSame: true });
+    console.log("testing match passwords : " + JSON.stringify(resp));
+    return resp;
   }
 
 }
